@@ -24,7 +24,7 @@ public class Plot {
 
 	public void display() {
 		parent.fill(color);
-		parent.rectMode(parent.CORNER);
+		parent.rectMode(parent.CENTER);
 		parent.rect(x,y,PLOT_SIZE,PLOT_SIZE);
 	}
 

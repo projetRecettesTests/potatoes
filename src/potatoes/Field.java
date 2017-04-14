@@ -7,7 +7,7 @@ public class Field {
 	public final static int ROWS = 20;
 	public final static int COLS = 40;
 	public final static int PLOT_SIZE = 30;
-	public final static int MARGIN = 25;
+	public final static int MARGIN = 40;
 
 	PApplet parent;
 	Plot[][] plots;
