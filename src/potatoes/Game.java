@@ -32,5 +32,16 @@ public class Game extends PApplet {
 
     }
 
+	@Override
+	public void mousePressed() {
+
+		if (mouseButton == LEFT) {
+			field.dig(mouseX, mouseY);
+		} else if (mouseButton == RIGHT) {
+
+		}
+
+	}
+
 
 }

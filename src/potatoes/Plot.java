@@ -18,12 +18,26 @@ public class Plot {
 		this.y = y;
 		this.parent = parent;
 
+		 color = parent.color(0, 153, 38);
+
 	}
 
 	public void display() {
-		System.out.println("Pouet");
-		parent.fill(parent.color(0, 153, 38));
+		parent.fill(color);
+		parent.rectMode(parent.CORNER);
 		parent.rect(x,y,PLOT_SIZE,PLOT_SIZE);
+	}
+
+	boolean inBounds(int posX, int posY) {
+
+		if (posX >= x - PLOT_SIZE / 2 && posX <= x + PLOT_SIZE / 2) {
+			if (posY >= y - PLOT_SIZE / 2 && posY <= y + PLOT_SIZE / 2) {
+				color = parent.color(25, 255, 38);
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public int getX() {
