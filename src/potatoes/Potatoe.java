@@ -2,8 +2,14 @@ package potatoes;
 
 public class Potatoe {
 
+	private PotatoeContext context;
+
 	public Potatoe() {
-		// TODO Auto-generated constructor stub
+		this.context = new PotatoeContext();
+	}
+
+	public PotatoeContext getContext() {
+		return context;
 	}
 
 	@Override
