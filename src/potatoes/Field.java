@@ -44,7 +44,8 @@ public class Field {
 		for(int i = 0 ; i < ROWS ; i++) {
 			for(int j = 0 ; j < COLS ; j++){
 				if (plots[i][j].inBounds(mouseX, mouseY)) {
-					System.out.println("x : " + plots[i][j].getX() + " y : " + plots[i][j].getY());
+					System.out.println("x : " + plots[i][j].getX() + " y : " + plots[i][j].getY()
+							+ " : " + plots[i][j].getPotatoe().toString());
 					}
 				}
 		}
