@@ -11,18 +11,18 @@ Sujet "libre", avec contraintes :
  - avoir 1 interface avec au moins 1 test de l'interface (simule des clics sur des boutons)
  - intégrer travis au projet
  - MVC, attends un code propre
- 
+
 Complexité, par ex :
  - Jeu de puissance 4 avec des règles additionnelle
 (faut des fonctionnalités bizarres pour montrer qu'on les a bien testées)
  - Jeu de la vie++
  - Démineur...++
 
-Présentation de 10 minutes 
+Présentation de 10 minutes
  - 5 minutes présentation du framework de test utilisé (comment on fait les fonctionnalistés principales ? Les features...)
  - 5 min présentation projet
 
- 
+
 Date butoire : dernière séance, présentation. Code à rendre le dimanche soir à la fin de la semaine
 
 
@@ -62,9 +62,9 @@ Potatoes++ :
  - Quelque chose : Rends insensible à la morsure pendant x clics : permet de déterrer des patates contaminantes (comptent pour 0 )
 
 
-Certificats de décès aléatoire: mort par morsure de patate... 
+Certificats de décès aléatoire: mort par morsure de patate...
 
-Cahier de recette 
+Cahier de recette
 Classes :
  - Grille
  - Cases (2 états : occupée ou creusée)
@@ -77,22 +77,22 @@ Grille :
  - remplissage de la grille
  - accéder à une case
  - placement de la patate contaminée
- 
+
 Case :
 -	création des cases ?
--	changement d'état (occupée / creusée) 
+-	changement d'état (occupée / creusée)
 	o	creuser une case occupée
 	o	creuser une case déjà creusée
 
 Un clic dans la grille doit :
  - creuser la bonne case
  - faire évoluer les patates (changement d'état + contamination)
- 
-Patates : 
+
+Patates :
 -	Changement d'état
--	Contamination (en fonction du nombre de voisines)  
-	o	les différents cas « normaux » de contamination. 
-	o	si toutes les patates sont contaminées ? 
+-	Contamination (en fonction du nombre de voisines)
+	o	les différents cas « normaux » de contamination.
+	o	si toutes les patates sont contaminées ?
 	o	si plus de patates contaminantes ?
 	o	si que zone morte comme voisines ?
 
@@ -104,7 +104,7 @@ Creuser : réaction en fonction des états de la patate contenue
 	 - zone morte : increusable
  - Case creusée : increusable
 
-Pleine Lune : 
+Pleine Lune :
  - Après X minutes : si plus de patatates saines : victoire
  - si plus de patates contaminées : mort
  - si 50/50 : fin alternative
@@ -112,7 +112,7 @@ Si plus possible de jouer avant la fin ?
 
 
 TODO :
-[ ] Remplir la grille de patatates
+[x] Remplir la grille de patatates
 [ ] Changer les patates d'état (pattern state ?)
-[ ] Placer la patate contaminée
+[x] Placer la patate contaminée
 [ ] Contaminer !
