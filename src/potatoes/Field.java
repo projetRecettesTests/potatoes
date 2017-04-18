@@ -1,5 +1,7 @@
 package potatoes;
 
+import java.util.Random;
+
 import processing.core.PApplet;
 
 public class Field {
@@ -12,6 +14,11 @@ public class Field {
 	PApplet parent;
 	Plot[][] plots;
 
+	HealthyState healthyState = new HealthyState();
+	ContaminatedState contaminatedState = new ContaminatedState();
+
+	Random r = new Random();
+
 	public Field(PApplet parent) {
 		this.parent = parent;
 		generateField();
@@ -20,6 +27,11 @@ public class Field {
 	private void generateField() {
 		plots = new Plot[ROWS][COLS];
 
+		int randX = r.nextInt(COLS - 1);
+		int randY = r.nextInt(ROWS - 1);
+
+		System.out.println(randX + " " + randY);
+
 		for (int r = 0; r < ROWS; r++) {
 			for (int c = 0; c < COLS; c++) {
 				int x = c * PLOT_SIZE + MARGIN; // cols at
@@ -27,6 +39,13 @@ public class Field {
 				int y = r * PLOT_SIZE + MARGIN; // rows at
 												// y=60,90,120,150,180,210,240,270,300,330
 				plots[r][c] = new Plot(x, y, parent);
+
+				if(c == randX && r == randY) {
+					contaminatedState.changeState(plots[r][c].getPotatoe().getContext());
+				}
+				else {
+					healthyState.changeState(plots[r][c].getPotatoe().getContext());
+				}
 
 			}
 		}
@@ -45,7 +64,7 @@ public class Field {
 			for(int j = 0 ; j < COLS ; j++){
 				if (plots[i][j].inBounds(mouseX, mouseY)) {
 					System.out.println("x : " + plots[i][j].getX() + " y : " + plots[i][j].getY()
-							+ " : " + plots[i][j].getPotatoe().toString());
+							+ " : " + plots[i][j].getPotatoe().getContext().getState().toString());
 					}
 				}
 		}

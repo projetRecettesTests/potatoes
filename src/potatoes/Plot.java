@@ -19,6 +19,7 @@ public class Plot {
 		this.x = x;
 		this.y = y;
 		this.parent = parent;
+		this.potatoe = new Potatoe();
 
 		color = parent.color(0, 153, 38);
 
