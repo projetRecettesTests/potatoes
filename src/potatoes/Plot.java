@@ -1,6 +1,7 @@
 package potatoes;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 public class Plot {
 
@@ -8,6 +9,7 @@ public class Plot {
 	//public final int REG_COLOR = color(255);
 
 	PApplet parent;
+	Potatoe potatoe;
 
 	private int x;
 	private int y;
@@ -17,14 +19,15 @@ public class Plot {
 		this.x = x;
 		this.y = y;
 		this.parent = parent;
+		this.potatoe = new Potatoe();
 
-		 color = parent.color(0, 153, 38);
+		color = parent.color(0, 153, 38);
 
 	}
 
 	public void display() {
 		parent.fill(color);
-		parent.rectMode(parent.CENTER);
+		parent.rectMode(PConstants.CENTER);
 		parent.rect(x,y,PLOT_SIZE,PLOT_SIZE);
 	}
 
@@ -47,5 +50,15 @@ public class Plot {
 	public int getY() {
 		return y;
 	}
+
+	public Potatoe getPotatoe() {
+		return potatoe;
+	}
+
+	public void setPotatoe(Potatoe potatoe) {
+		this.potatoe = potatoe;
+	}
+
+
 
 }
