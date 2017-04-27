@@ -29,7 +29,7 @@ public class Plot {
 		parent.fill(color);
 		parent.rectMode(PConstants.CENTER);
 		parent.rect(x,y,PLOT_SIZE,PLOT_SIZE);
-		this.checkPotato();
+		//this.checkPotato();
 	}
 
 	boolean inBounds(int posX, int posY) {
@@ -44,9 +44,15 @@ public class Plot {
 		return false;
 	}
 
-	private void checkPotato(){
+	public void checkPotato(){
+		if (this.potato.getContext().getState().toString() ==  "Healthy State"){
+			changeColor(parent.color(79, 36, 5));
+		}
 		if (this.potato.getContext().getState().toString() ==  "Contaminated State"){
-			changeColor(parent.color(25, 0, 38));
+			changeColor(parent.color(249, 94, 4));
+		}
+		if (this.potato.getContext().getState().toString() ==  "Contagious State"){
+			changeColor(parent.color(237, 14, 2));
 		}
 	}
 
