@@ -29,18 +29,29 @@ public class Plot {
 		parent.fill(color);
 		parent.rectMode(PConstants.CENTER);
 		parent.rect(x,y,PLOT_SIZE,PLOT_SIZE);
+		this.checkPotatoe();
 	}
 
 	boolean inBounds(int posX, int posY) {
 
 		if (posX >= x - PLOT_SIZE / 2 && posX <= x + PLOT_SIZE / 2) {
 			if (posY >= y - PLOT_SIZE / 2 && posY <= y + PLOT_SIZE / 2) {
-				color = parent.color(25, 255, 38);
+				changeColor(parent.color(25, 255, 38));
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+	private void checkPotatoe(){
+		if (this.potatoe.getContext().getState().toString() ==  "Contaminated State"){
+			changeColor(parent.color(25, 0, 38));
+		}
+	}
+
+	public void changeColor(int color) {
+		this.color = color;
 	}
 
 	public int getX() {
