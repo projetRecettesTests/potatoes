@@ -1,10 +1,10 @@
 package potatoes;
 
-public class ContagiousState implements IPotatoeState {
+public class ContagiousState implements IPotatoState {
 
 	@Override
-	public void changeState(PotatoeContext context) {
-		System.out.println("Potatoe is in contagious state");
+	public void changeState(PotatoContext context) {
+		System.out.println("Potato is in contagious state");
 		context.setState(this);
 	}
 

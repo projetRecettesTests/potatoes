@@ -1,10 +1,10 @@
 package potatoes;
 
-public class ContaminatedState implements IPotatoeState {
+public class ContaminatedState implements IPotatoState {
 
 	@Override
-	public void changeState(PotatoeContext context) {
-		System.out.println("Potatoe is in contaminated state");
+	public void changeState(PotatoContext context) {
+		System.out.println("Potato is in contaminated state");
 		context.setState(this);
 	}
 
