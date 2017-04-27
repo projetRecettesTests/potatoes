@@ -27,8 +27,8 @@ public class Field {
 	private void generateField() {
 		plots = new Plot[ROWS][COLS];
 
-		int randX = r.nextInt(COLS - 1);
-		int randY = r.nextInt(ROWS - 1);
+		int randX = r.nextInt((COLS - 2) - 1) + 2;
+		int randY = r.nextInt((ROWS - 2) - 1) + 2;
 
 		System.out.println(randX + " " + randY);
 
