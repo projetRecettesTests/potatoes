@@ -41,10 +41,10 @@ public class Field {
 				plots[r][c] = new Plot(x, y, parent);
 
 				if(c == randX && r == randY) {
-					contaminatedState.changeState(plots[r][c].getPotatoe().getContext());
+					contaminatedState.changeState(plots[r][c].getPotato().getContext());
 				}
 				else {
-					healthyState.changeState(plots[r][c].getPotatoe().getContext());
+					healthyState.changeState(plots[r][c].getPotato().getContext());
 				}
 
 			}
@@ -64,7 +64,7 @@ public class Field {
 			for(int j = 0 ; j < COLS ; j++){
 				if (plots[i][j].inBounds(mouseX, mouseY)) {
 					System.out.println("x : " + plots[i][j].getX() + " y : " + plots[i][j].getY()
-							+ " : " + plots[i][j].getPotatoe().getContext().getState().toString());
+							+ " : " + plots[i][j].getPotato().getContext().getState().toString());
 					}
 				}
 		}

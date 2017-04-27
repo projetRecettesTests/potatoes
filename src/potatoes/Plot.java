@@ -9,7 +9,7 @@ public class Plot {
 	//public final int REG_COLOR = color(255);
 
 	PApplet parent;
-	Potatoe potatoe;
+	Potato potato;
 
 	private int x;
 	private int y;
@@ -19,7 +19,7 @@ public class Plot {
 		this.x = x;
 		this.y = y;
 		this.parent = parent;
-		this.potatoe = new Potatoe();
+		this.potato = new Potato();
 
 		color = parent.color(0, 153, 38);
 
@@ -29,7 +29,7 @@ public class Plot {
 		parent.fill(color);
 		parent.rectMode(PConstants.CENTER);
 		parent.rect(x,y,PLOT_SIZE,PLOT_SIZE);
-		this.checkPotatoe();
+		this.checkPotato();
 	}
 
 	boolean inBounds(int posX, int posY) {
@@ -44,8 +44,8 @@ public class Plot {
 		return false;
 	}
 
-	private void checkPotatoe(){
-		if (this.potatoe.getContext().getState().toString() ==  "Contaminated State"){
+	private void checkPotato(){
+		if (this.potato.getContext().getState().toString() ==  "Contaminated State"){
 			changeColor(parent.color(25, 0, 38));
 		}
 	}
@@ -62,12 +62,12 @@ public class Plot {
 		return y;
 	}
 
-	public Potatoe getPotatoe() {
-		return potatoe;
+	public Potato getPotato() {
+		return potato;
 	}
 
-	public void setPotatoe(Potatoe potatoe) {
-		this.potatoe = potatoe;
+	public void setPotato(Potato potato) {
+		this.potato = potato;
 	}
 
 
