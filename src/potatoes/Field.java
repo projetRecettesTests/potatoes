@@ -66,7 +66,7 @@ public class Field {
 				if (plots[i][j].inBounds(mouseX, mouseY)) {
 					selectedPlot = plots[i][j];
 					System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
-							+ " : " + selectedPlot.getPotato().getContext().getState().toString());
+							+ " : " + getPotatoState(selectedPlot));
 					selectedPlot.checkPotato();
 					}
 				}

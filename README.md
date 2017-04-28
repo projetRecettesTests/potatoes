@@ -112,7 +112,7 @@ Si plus possible de jouer avant la fin ?
 
 
 TODO :
-[x] Remplir la grille de patatates
+[x] Remplir la grille de patates
 [ ] Changer les patates d'état (pattern state ?)
 [x] Placer la patate contaminée
 [ ] Contaminer !
