@@ -14,7 +14,7 @@ public class Potato {
 
 	@Override
 	public String toString() {
-		return "Patate plac�e";
+		return "Patate placée";
 	}
 
 }
