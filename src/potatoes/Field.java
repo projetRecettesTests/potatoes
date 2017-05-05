@@ -13,7 +13,6 @@ public class Field {
 
 	PApplet parent;
 	Plot[][] plots;
-	Plot selectedPlot;
 
 	HealthyState healthyState = new HealthyState();
 	ContaminatedState contaminatedState = new ContaminatedState();
@@ -61,22 +60,36 @@ public class Field {
 	}
 
 	public void dig(int mouseX, int mouseY) {
+		Plot selectedPlot = getSelectedPlot(mouseX, mouseY);
+		if (selectedPlot != null){
+			System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
+			+ " : " + getPotatoState(selectedPlot));
+			selectedPlot.checkPotato();
+		}
+	}
+
+	public Plot getSelectedPlot(int mouseX, int mouseY) {
+		Plot selectedPlot = null;
 		for(int i = 0 ; i < ROWS ; i++) {
 			for(int j = 0 ; j < COLS ; j++){
 				if (plots[i][j].inBounds(mouseX, mouseY)) {
 					selectedPlot = plots[i][j];
-					System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
-							+ " : " + getPotatoState(selectedPlot));
-					selectedPlot.checkPotato();
-					}
 				}
+			}
 		}
-
+		return selectedPlot;
 	}
 	
 	public String getPotatoState(Plot plot) {
 		return plot.getPotato().getContext().getState().toString();
 	}
 
+	public static int getCols() {
+		return COLS;
+	}
+
+	public Plot[][] getPlots() {
+		return plots;
+	}
 
 }

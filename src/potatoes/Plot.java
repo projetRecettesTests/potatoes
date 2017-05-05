@@ -35,7 +35,6 @@ public class Plot {
 
 		if (posX >= x - PLOT_SIZE / 2 && posX <= x + PLOT_SIZE / 2) {
 			if (posY >= y - PLOT_SIZE / 2 && posY <= y + PLOT_SIZE / 2) {
-				changeColor(parent.color(25, 255, 38));
 				return true;
 			}
 		}
@@ -75,6 +74,11 @@ public class Plot {
 		this.potato = potato;
 	}
 
-
+	public boolean isDigged() {
+		if(this.color != parent.color(0, 153, 38)) {
+			return true;
+		}
+		return false;
+	}
 
 }
