@@ -1,5 +1,7 @@
 package recetteTests.projet.potatoes;
 
+import java.util.List;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 
@@ -16,6 +18,8 @@ public class Plot {
 	private int x;
 	private int y;
 	private int color;
+	
+	List<Plot> Neighbors;
 
 	public Plot(int row, int col, int x, int y, PApplet parent) {
 		this.row = row;
@@ -26,7 +30,6 @@ public class Plot {
 		this.potato = new Potato();
 
 		color = parent.color(0, 153, 38);
-
 	}
 
 	public void display() {
@@ -93,5 +96,13 @@ public class Plot {
 		}
 		return false;
 	}
+	
+	public List<Plot> getNeighbors() {
+		return Neighbors;
+	}
+
+	public void setNeighbors(List<Plot> neighbors) {
+		Neighbors = neighbors;
+}
 
 }

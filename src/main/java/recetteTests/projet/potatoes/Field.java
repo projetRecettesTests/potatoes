@@ -55,6 +55,12 @@ public class Field {
 
 			}
 		}
+		
+		for(int i = 0 ; i < ROWS ; i++) {
+			for(int j = 0 ; j < COLS ; j++){
+				this.findPlotNeighbors(plots[i][j]);
+			}
+		}		
 	}
 
 	public void display() {
@@ -77,10 +83,14 @@ public class Field {
 	}
 	
 	public void contaminate(){
+		List<Plot> neighbors;
 		for(Plot contaminatedPlot : contaminatedPlots){
-			this.getPlotNeighbors(contaminatedPlot);
+			neighbors = contaminatedPlot.getNeighbors();
+			for(Plot neighbor : neighbors){
+				contaminatedState.changeState(neighbor.getPotato().getContext());
 			}
 		}
+	}
 
 	public Plot getSelectedPlot(int mouseX, int mouseY) {
 		Plot selectedPlot = null;
@@ -106,19 +116,15 @@ public class Field {
 		return plots;
 	}
 	
-	public List<Plot> getPlotNeighbors(Plot plot){
-		
+	public void findPlotNeighbors(Plot plot){	
 		List<Plot> neigbhors = new ArrayList<>();
 		
-		for(int i = plot.getRow() - 1  ; i <= plot.getRow()+1 && i < ROWS ; i++){
-			for(int j = plot.getCol() - 1  ; j <= plot.getCol()+1 && j < COLS ; j++){
-					neigbhors.add(plots[i][j]);
-					contaminatedState.changeState(plots[i][j].getPotato().getContext());
-
+		for(int i = plot.getRow() - 1  ; i <= plot.getRow()+1 && i < ROWS && i >= 0 ; i++){
+			for(int j = plot.getCol() - 1  ; j <= plot.getCol()+1 && j < COLS && j >= 0 ; j++){
+				neigbhors.add(plots[i][j]);
 			}
 		}
-		return neigbhors;
-		
-}
+		plot.setNeighbors(neigbhors);	
+	}
 
 }
