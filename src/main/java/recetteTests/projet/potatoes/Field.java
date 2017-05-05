@@ -1,5 +1,7 @@
 package recetteTests.projet.potatoes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import processing.core.PApplet;
@@ -13,6 +15,7 @@ public class Field {
 
 	PApplet parent;
 	Plot[][] plots;
+	List<Plot> contaminatedPlots;
 
 	HealthyState healthyState = new HealthyState();
 	ContaminatedState contaminatedState = new ContaminatedState();
@@ -26,6 +29,8 @@ public class Field {
 
 	private void generateField() {
 		plots = new Plot[ROWS][COLS];
+		
+		contaminatedPlots = new ArrayList<>();
 
 		int randX = r.nextInt((COLS - 2) - 1) + 2;
 		int randY = r.nextInt((ROWS - 2) - 1) + 2;
@@ -38,10 +43,11 @@ public class Field {
 												// x=40,70,100,130,150,190,220,250,280,310
 				int y = r * PLOT_SIZE + MARGIN; // rows at
 												// y=60,90,120,150,180,210,240,270,300,330
-				plots[r][c] = new Plot(x, y, parent);
+				plots[r][c] = new Plot(r, c, x, y, parent);
 
 				if(c == randX && r == randY) {
 					contaminatedState.changeState(plots[r][c].getPotato().getContext());
+					contaminatedPlots.add(plots[r][c]);
 				}
 				else {
 					healthyState.changeState(plots[r][c].getPotato().getContext());
@@ -49,6 +55,12 @@ public class Field {
 
 			}
 		}
+		
+		for(int i = 0 ; i < ROWS ; i++) {
+			for(int j = 0 ; j < COLS ; j++){
+				this.findPlotNeighbors(plots[i][j]);
+			}
+		}		
 	}
 
 	public void display() {
@@ -65,6 +77,18 @@ public class Field {
 			System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
 			+ " : " + getPotatoState(selectedPlot));
 			selectedPlot.checkPotato();
+			
+			this.contaminate();
+		}
+	}
+	
+	public void contaminate(){
+		List<Plot> neighbors;
+		for(Plot contaminatedPlot : contaminatedPlots){
+			neighbors = contaminatedPlot.getNeighbors();
+			for(Plot neighbor : neighbors){
+				contaminatedState.changeState(neighbor.getPotato().getContext());
+			}
 		}
 	}
 
@@ -90,6 +114,17 @@ public class Field {
 
 	public Plot[][] getPlots() {
 		return plots;
+	}
+	
+	public void findPlotNeighbors(Plot plot){	
+		List<Plot> neigbhors = new ArrayList<>();
+		
+		for(int i = plot.getRow() - 1  ; i <= plot.getRow()+1 && i < ROWS && i >= 0 ; i++){
+			for(int j = plot.getCol() - 1  ; j <= plot.getCol()+1 && j < COLS && j >= 0 ; j++){
+				neigbhors.add(plots[i][j]);
+			}
+		}
+		plot.setNeighbors(neigbhors);	
 	}
 
 }
