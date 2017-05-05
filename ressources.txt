@@ -1,2 +1,0 @@
-https://processing.org/tutorials/eclipse/
-https://www.tutorialspoint.com/design_pattern/state_pattern.htm
