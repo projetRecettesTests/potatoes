@@ -10,12 +10,16 @@ public class Plot {
 
 	PApplet parent;
 	Potato potato;
-
+	
+	private int row;
+	private int col;
 	private int x;
 	private int y;
 	private int color;
 
-	public Plot(int x, int y, PApplet parent) {
+	public Plot(int row, int col, int x, int y, PApplet parent) {
+		this.row = row;
+		this.col = col;
 		this.x = x;
 		this.y = y;
 		this.parent = parent;
@@ -29,6 +33,7 @@ public class Plot {
 		parent.fill(color);
 		parent.rectMode(PConstants.CENTER);
 		parent.rect(x,y,PLOT_SIZE,PLOT_SIZE);
+		this.checkPotato();
 	}
 
 	boolean inBounds(int posX, int posY) {
@@ -56,6 +61,14 @@ public class Plot {
 
 	public void changeColor(int color) {
 		this.color = color;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
 	}
 
 	public int getX() {
