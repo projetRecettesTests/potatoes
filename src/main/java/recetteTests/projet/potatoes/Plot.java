@@ -52,18 +52,14 @@ public class Plot {
 
 	public void checkPotato(){
 		if (this.potato.getContext().getState().toString() ==  "Healthy State"){
-			changeColor(parent.color(79, 36, 5));
+			setColor(parent.color(79, 36, 5));
 		}
 		else if (this.potato.getContext().getState().toString() ==  "Contaminated State"){
-			changeColor(parent.color(249, 94, 4));
+			setColor(parent.color(249, 94, 4));
 		}
 		else if (this.potato.getContext().getState().toString() ==  "Contagious State"){
-			changeColor(parent.color(237, 14, 2));
+			setColor(parent.color(237, 14, 2));
 		}
-	}
-
-	public void changeColor(int color) {
-		this.color = color;
 	}
 	
 	public int getRow() {
@@ -80,6 +76,14 @@ public class Plot {
 
 	public int getY() {
 		return y;
+	}
+
+	public int getColor() {
+		return color;
+	}
+
+	public void setColor(int color) {
+		this.color = color;
 	}
 
 	public Potato getPotato() {
