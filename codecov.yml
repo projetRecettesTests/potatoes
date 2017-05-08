@@ -1,19 +1,26 @@
-#
-# This codecov.yml is the default configuration for
-# all repositories on Codecov. You may adjust the settings
-# below in your own codecov.yml in your repository.
-#
+codecov:
+  notify:
+    require_ci_to_pass: yes
+
 coverage:
   precision: 2
   round: down
-  range: 70...100
+  range: "70...100"
 
   status:
-    # Learn more at http://docs.codecov.io/docs/codecov-yaml
-    project: true
-    patch: true
-    changes: false
+    project: yes
+    patch: yes
+    changes: no
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
 
 comment:
   layout: "header, diff"
-  behavior: default  # update if exists else create new
+  behavior: default
+  require_changes: no
