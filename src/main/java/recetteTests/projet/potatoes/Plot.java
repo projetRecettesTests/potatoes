@@ -64,12 +64,13 @@ public class Plot {
 				break;
 			case 3 :
 				setColor(parent.color(237, 14, 2));
+				break;
 			case 4 :
 				setColor(parent.color(0, 0, 0));
+				break;
 			}
 
 		//}
-		System.out.println(this.potato.toString());
 	}
 
 	public boolean dig() {

@@ -79,12 +79,17 @@ public class Field {
 
 	public void contaminate(){
 		List<Plot> neighbors;
-		for(Plot contaminatedPlot : contaminatedPlots){
-			neighbors = contaminatedPlot.getNeighbors();
+
+		List<Plot> newlyContaminated = new ArrayList<>();
+
+		for(Plot contaminatedplot : contaminatedPlots){
+			neighbors = contaminatedplot.getNeighbors();
 			for(Plot neighbor : neighbors){
 				neighbor.getPotato().changeState();
+				newlyContaminated.add(neighbor);
 			}
 		}
+		contaminatedPlots.addAll(newlyContaminated);
 	}
 
 	public Plot getSelectedPlot(int mouseX, int mouseY) {
