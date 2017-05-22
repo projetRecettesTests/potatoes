@@ -39,22 +39,24 @@ public class PlotShould {
 	@Test
 	public void changeColorWhenDiggedOnHealthyPotato() {
 		healthyState.changeState(potato.getContext());
-		this.field.dig(mouseX, mouseY);
+		this.field.digPlot(mouseX, mouseY);
 		assertEquals(game.color(79, 36, 5), this.plot.getColor());
 	}
 	
 	@Test
 	public void changeColorWhenDiggedOnContaminatedPotato() {
 		contaminatedState.changeState(potato.getContext());
-		this.field.dig(mouseX, mouseY);
+		this.field.digPlot(mouseX, mouseY);
 		assertEquals(game.color(249, 94, 4), this.plot.getColor());
 	}
 	
 	@Test
 	public void changeColorWhenDiggedOnContagiousPotato() {
 		contagiousState.changeState(potato.getContext());
-		this.field.dig(mouseX, mouseY);
+		this.field.digPlot(mouseX, mouseY);
 		assertEquals(game.color(237, 14, 2), this.plot.getColor());
 	}
+	
+	
 
 }

@@ -19,6 +19,8 @@ public class Plot {
 	private int y;
 	private int color;
 	
+	private boolean isDigged;
+
 	List<Plot> Neighbors;
 
 	public Plot(int row, int col, int x, int y, PApplet parent) {
@@ -28,6 +30,7 @@ public class Plot {
 		this.y = y;
 		this.parent = parent;
 		this.potato = new Potato();
+		this.isDigged = false;
 
 		color = parent.color(0, 153, 38);
 	}
@@ -60,6 +63,15 @@ public class Plot {
 		else if (this.potato.getContext().getState().toString() ==  "Contagious State"){
 			setColor(parent.color(237, 14, 2));
 		}
+	}	
+
+	public boolean dig() {
+		if(!this.isDigged) {
+			this.setDigged(true);
+			this.checkPotato();		
+			return true;
+		}	
+		return false;
 	}
 	
 	public int getRow() {
@@ -95,10 +107,11 @@ public class Plot {
 	}
 
 	public boolean isDigged() {
-		if(this.color != parent.color(0, 153, 38)) {
-			return true;
-		}
-		return false;
+		return this.isDigged;
+	}
+	
+	public void setDigged(boolean isDigged) {
+		this.isDigged = isDigged;
 	}
 	
 	public List<Plot> getNeighbors() {
@@ -107,6 +120,7 @@ public class Plot {
 
 	public void setNeighbors(List<Plot> neighbors) {
 		Neighbors = neighbors;
-}
+	}
+
 
 }
