@@ -74,11 +74,14 @@ public class Field {
 	public void dig(int mouseX, int mouseY) {
 		Plot selectedPlot = getSelectedPlot(mouseX, mouseY);
 		if (selectedPlot != null){
-			System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
-			+ " : " + getPotatoState(selectedPlot));
-			selectedPlot.checkPotato();
+			if(!selectedPlot.isDigged()) {
+				System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
+				+ " : " + getPotatoState(selectedPlot));
+				selectedPlot.checkPotato();
+				
+				this.contaminate();
+			}
 			
-			this.contaminate();
 		}
 	}
 	
