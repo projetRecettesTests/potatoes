@@ -12,13 +12,13 @@ public class Plot {
 
 	PApplet parent;
 	Potato potato;
-	
+
 	private int row;
 	private int col;
 	private int x;
 	private int y;
 	private int color;
-	
+
 	private boolean isDigged;
 
 	List<Plot> Neighbors;
@@ -54,26 +54,33 @@ public class Plot {
 	}
 
 	public void checkPotato(){
-		if (this.potato.getContext().getState().toString() ==  "Healthy State"){
-			setColor(parent.color(79, 36, 5));
-		}
-		else if (this.potato.getContext().getState().toString() ==  "Contaminated State"){
-			setColor(parent.color(249, 94, 4));
-		}
-		else if (this.potato.getContext().getState().toString() ==  "Contagious State"){
-			setColor(parent.color(237, 14, 2));
-		}
-	}	
+		//if (this.isDigged){
+			switch (this.potato.getState()){
+			case 1 :
+				setColor(parent.color(79, 36, 5));
+				break;
+			case 2 :
+				setColor(parent.color(249, 94, 4));
+				break;
+			case 3 :
+				setColor(parent.color(237, 14, 2));
+			case 4 :
+				setColor(parent.color(0, 0, 0));
+			}
+
+		//}
+		System.out.println(this.potato.toString());
+	}
 
 	public boolean dig() {
 		if(!this.isDigged) {
 			this.setDigged(true);
-			this.checkPotato();		
+			this.checkPotato();
 			return true;
-		}	
+		}
 		return false;
 	}
-	
+
 	public int getRow() {
 		return row;
 	}
@@ -109,11 +116,11 @@ public class Plot {
 	public boolean isDigged() {
 		return this.isDigged;
 	}
-	
+
 	public void setDigged(boolean isDigged) {
 		this.isDigged = isDigged;
 	}
-	
+
 	public List<Plot> getNeighbors() {
 		return Neighbors;
 	}

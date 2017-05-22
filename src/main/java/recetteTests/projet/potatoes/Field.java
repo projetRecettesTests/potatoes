@@ -17,9 +17,6 @@ public class Field {
 	Plot[][] plots;
 	List<Plot> contaminatedPlots;
 
-	HealthyState healthyState = new HealthyState();
-	ContaminatedState contaminatedState = new ContaminatedState();
-
 	Random r = new Random();
 
 	public Field(PApplet parent) {
@@ -29,7 +26,7 @@ public class Field {
 
 	private void generateField() {
 		plots = new Plot[ROWS][COLS];
-		
+
 		contaminatedPlots = new ArrayList<>();
 
 		int randX = r.nextInt((COLS - 2) - 1) + 2;
@@ -46,21 +43,18 @@ public class Field {
 				plots[r][c] = new Plot(r, c, x, y, parent);
 
 				if(c == randX && r == randY) {
-					contaminatedState.changeState(plots[r][c].getPotato().getContext());
+					plots[r][c].getPotato().changeState();
 					contaminatedPlots.add(plots[r][c]);
-				}
-				else {
-					healthyState.changeState(plots[r][c].getPotato().getContext());
 				}
 
 			}
 		}
-		
+
 		for(int i = 0 ; i < ROWS ; i++) {
 			for(int j = 0 ; j < COLS ; j++){
 				this.findPlotNeighbors(plots[i][j]);
 			}
-		}		
+		}
 	}
 
 	public void display() {
@@ -75,20 +69,20 @@ public class Field {
 		Plot selectedPlot = getSelectedPlot(mouseX, mouseY);
 		if (selectedPlot != null){
 			if(selectedPlot.dig()) {
-//				System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
-//				+ " : " + getPotatoState(selectedPlot));
+				System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
+				+ " : " + selectedPlot.getPotato().toString());
 				this.contaminate();
 			}
-			
+
 		}
 	}
-	
+
 	public void contaminate(){
 		List<Plot> neighbors;
 		for(Plot contaminatedPlot : contaminatedPlots){
 			neighbors = contaminatedPlot.getNeighbors();
 			for(Plot neighbor : neighbors){
-				contaminatedState.changeState(neighbor.getPotato().getContext());
+				neighbor.getPotato().changeState();
 			}
 		}
 	}
@@ -104,10 +98,6 @@ public class Field {
 		}
 		return selectedPlot;
 	}
-	
-	public String getPotatoState(Plot plot) {
-		return plot.getPotato().getContext().getState().toString();
-	}
 
 	public static int getCols() {
 		return COLS;
@@ -116,16 +106,16 @@ public class Field {
 	public Plot[][] getPlots() {
 		return plots;
 	}
-	
-	public void findPlotNeighbors(Plot plot){	
+
+	public void findPlotNeighbors(Plot plot){
 		List<Plot> neigbhors = new ArrayList<>();
-		
+
 		for(int i = plot.getRow() - 1  ; i <= plot.getRow()+1 && i < ROWS && i >= 0 ; i++){
 			for(int j = plot.getCol() - 1  ; j <= plot.getCol()+1 && j < COLS && j >= 0 ; j++){
 				neigbhors.add(plots[i][j]);
 			}
 		}
-		plot.setNeighbors(neigbhors);	
+		plot.setNeighbors(neigbhors);
 	}
 
 }
