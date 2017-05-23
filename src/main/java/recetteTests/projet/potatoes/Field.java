@@ -16,7 +16,7 @@ public class Field {
 
 	PApplet parent;
 	Plot[][] plots;
-	List<Plot> contaminatedPlots;
+	List<Plot> unhealthyPlots;
 
 	Random randomizer = new Random();
 
@@ -28,7 +28,7 @@ public class Field {
 	private void generateField() {
 		plots = new Plot[ROWS][COLS];
 
-		contaminatedPlots = new ArrayList<>();
+		unhealthyPlots = new ArrayList<>();
 
 		int randX = randomizer.nextInt((COLS - 2) - 1) + 2;
 		int randY = randomizer.nextInt((ROWS - 2) - 1) + 2;
@@ -45,7 +45,7 @@ public class Field {
 
 				if(c == randX && r == randY) {
 					plots[r][c].getPotato().changeState();
-					contaminatedPlots.add(plots[r][c]);
+					unhealthyPlots.add(plots[r][c]);
 					System.out.println("x : " + r + " y : " + c
 					+ " : " + plots[r][c].getPotato().toString());
 				}
@@ -85,10 +85,10 @@ public class Field {
 		boolean ok;
 		List<Plot> neighbors;
 
-		for(Plot contaminatedplot : contaminatedPlots){
-			if(contaminatedplot.getPotato().isContagious()) {
+		for(Plot unhealthyPlot : unhealthyPlots){
+			if(unhealthyPlot.getPotato().isContagious()) {
 				ok = false;
-				neighbors = contaminatedplot.getNeighbors();
+				neighbors = unhealthyPlot.getNeighbors();
 				Collections.shuffle(neighbors);
 				int i = 0;
 				while(!ok && i < neighbors.size()-1) {
@@ -100,16 +100,19 @@ public class Field {
 					i++;
 				}
 			}
-			contaminatedplot.getPotato().changeState();
+			if (!unhealthyPlot.isDigged()){
+				unhealthyPlot.getPotato().changeState();			
+			}
+
 		}
 	}
 	
 	public void findContaminatedPotatoes() {
-		contaminatedPlots.clear();
+		unhealthyPlots.clear();
 		for(int i = 0 ; i < ROWS ; i++) {
 			for(int j = 0 ; j < COLS ; j++){
 				if (!plots[i][j].getPotato().isHealthy()) {
-					contaminatedPlots.add(plots[i][j]);
+					unhealthyPlots.add(plots[i][j]);
 				}
 			}
 		}
