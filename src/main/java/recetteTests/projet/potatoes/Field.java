@@ -17,7 +17,7 @@ public class Field {
 	Plot[][] plots;
 	List<Plot> contaminatedPlots;
 
-	Random r = new Random();
+	Random randomizer = new Random();
 
 	public Field(PApplet parent) {
 		this.parent = parent;
@@ -29,8 +29,8 @@ public class Field {
 
 		contaminatedPlots = new ArrayList<>();
 
-		int randX = r.nextInt((COLS - 2) - 1) + 2;
-		int randY = r.nextInt((ROWS - 2) - 1) + 2;
+		int randX = randomizer.nextInt((COLS - 2) - 1) + 2;
+		int randY = randomizer.nextInt((ROWS - 2) - 1) + 2;
 
 		System.out.println(randX + " " + randY);
 
@@ -79,14 +79,16 @@ public class Field {
 
 	public void contaminate(){
 		findContaminatedPotatoes();
-		
+		boolean ok = false;
 		List<Plot> neighbors;
 
 		for(Plot contaminatedplot : contaminatedPlots){
 			if(contaminatedplot.getPotato().isContagious()) {
 				neighbors = contaminatedplot.getNeighbors();
-				for(Plot neighbor : neighbors){
+				while(!ok) {
+					Plot neighbor = neighbors.get(randomizer.nextInt(neighbors.size()));
 					if(neighbor.getPotato().isHealthy()) {
+						ok = true;
 						neighbor.getPotato().changeState();
 					}
 				}
