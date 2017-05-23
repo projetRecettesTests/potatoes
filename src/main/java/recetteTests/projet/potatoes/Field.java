@@ -14,14 +14,22 @@ public class Field {
 	public final static int PLOT_SIZE = 30;
 	public final static int MARGIN = 40;
 
+	private static long SEED=0;
+	
 	PApplet parent;
 	Plot[][] plots;
-	List<Plot> unhealthyPlots;
+	public List<Plot> unhealthyPlots;
 
 	Random randomizer = new Random();
 
 	public Field(PApplet parent) {
 		this.parent = parent;
+		
+		if(SEED != 0) {
+			System.out.println(SEED);
+			randomizer.setSeed(SEED);
+		}
+		
 		generateField();
 	}
 
@@ -29,11 +37,9 @@ public class Field {
 		plots = new Plot[ROWS][COLS];
 
 		unhealthyPlots = new ArrayList<>();
-
+		
 		int randX = randomizer.nextInt((COLS - 2) - 1) + 2;
 		int randY = randomizer.nextInt((ROWS - 2) - 1) + 2;
-
-		System.out.println(randX + " " + randY);
 
 		for (int r = 0; r < ROWS; r++) {
 			for (int c = 0; c < COLS; c++) {
@@ -44,10 +50,9 @@ public class Field {
 				plots[r][c] = new Plot(r, c, x, y, parent);
 
 				if(c == randX && r == randY) {
-					plots[r][c].getPotato().changeState();
-					unhealthyPlots.add(plots[r][c]);
+					putFirstContaminatedPotato(plots[r][c]);
 					System.out.println("x : " + r + " y : " + c
-					+ " : " + plots[r][c].getPotato().toString());
+							+ " : " + plots[r][c].getPotato().toString());
 				}
 
 			}
@@ -60,6 +65,12 @@ public class Field {
 		}
 	}
 
+	private void putFirstContaminatedPotato(Plot plot) {
+		plot.getPotato().changeState();
+		unhealthyPlots.add(plot);
+
+	}
+
 	public void display() {
 		for(int i = 0 ; i < ROWS ; i++) {
 			for(int j = 0 ; j < COLS ; j++){
@@ -69,12 +80,18 @@ public class Field {
 	}
 
 	public void digPlot(int mouseX, int mouseY) {
+		System.out.println("click"+ mouseX + " " + mouseY);
 		Plot selectedPlot = getSelectedPlot(mouseX, mouseY);
 		if (selectedPlot != null){
 			if(selectedPlot.dig()) {
 				System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
 				+ " : " + selectedPlot.getPotato().toString());
 				this.contaminate();
+				if(selectedPlot.getPotato().isContagious()) {
+					selectedPlot.checkPotato();
+					parent.noLoop();
+					System.out.println("You're DEAD motherfucker !");
+				}
 			}
 
 		}
@@ -136,6 +153,11 @@ public class Field {
 
 	public Plot[][] getPlots() {
 		return plots;
+	}
+	
+	
+	public static void setSeed(long s) {
+		SEED = s;
 	}
 
 	public void findPlotNeighbors(Plot plot){

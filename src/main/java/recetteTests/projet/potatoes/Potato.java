@@ -9,8 +9,9 @@ public class Potato {
 	private Map<Integer,String> stateList = new TreeMap<>();
 	private int state;
 	private int contaminationPower;
-	
-	Random randomizer = new Random();
+	private static long SEED=0;
+		
+	private Random randomizer = new Random();
 	
 	public Potato() {
 		this.stateList.put(1, "Healthy");
@@ -18,6 +19,11 @@ public class Potato {
 		this.stateList.put(3, "Contagious");
 		this.stateList.put(4, "Dead");
 		this.state = 1;
+		
+		if(SEED != 0) {
+			randomizer.setSeed(SEED);
+		}
+		
 		this.contaminationPower = randomizer.nextInt(3) + 1;
 	}
 
@@ -38,6 +44,10 @@ public class Potato {
 
 	public void setState(int state) {
 		this.state = state;
+	}
+	
+	public static void setSeed(long s) {
+		SEED = s;
 	}
 	
 	public boolean isHealthy() {
