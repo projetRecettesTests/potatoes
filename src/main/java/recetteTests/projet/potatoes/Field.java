@@ -91,7 +91,7 @@ public class Field {
 				int i = 0;
 				while(!ok && i < neighbors.size()-1) {
 					Plot neighbor = neighbors.get(i);
-					if(neighbor.getPotato().isHealthy()) {
+					if(neighbor.getPotato().isHealthy() && !neighbor.isDigged()) {
 						ok = true;
 						neighbor.getPotato().changeState();
 					}
