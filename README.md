@@ -55,7 +55,7 @@ Patate contaminante :
 Potatoes++ :
  - Gestion des niveaux (nombre de patates contaminées + temps avant la pleine lune)
  - Personnalisation (taille grille...)
- - Eau bénite placée aléatoirement : permet de ressusciter une patate contaimnée récolter
+ - Eau bénite placée aléatoirement : permet de ressusciter une patate contaimnée récoltée
  - 1 ligne horizontale creusée : super patate : transforme en patate saines une zone de zone morte
  - 1 ligne verticale creusée : rajoute x secondes avant pleine lune
  - Combo : 5 patates saines récoltées à la suite comptent pour 10
@@ -113,6 +113,12 @@ Si plus possible de jouer avant la fin ?
 
 TODO :
 [x] Remplir la grille de patates
-[ ] Changer les patates d'état (pattern state ?)
+[x] Changer les patates d'état (pattern state ?)
 [x] Placer la patate contaminée
-[ ] Contaminer !
+[x] Contaminer !
+[ ] Ajouter des tests
+[ ] Ajouter des prompts
+[ ] Afficher les stats du jeu (patates saines récoltées...)
+[ ] Ajouter une classe joueur ?
+[ ] Améliorer la contamination ?
+ 
