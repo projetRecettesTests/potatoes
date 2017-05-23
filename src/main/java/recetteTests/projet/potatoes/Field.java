@@ -78,18 +78,32 @@ public class Field {
 	}
 
 	public void contaminate(){
+		findContaminatedPotatoes();
+		
 		List<Plot> neighbors;
 
-		List<Plot> newlyContaminated = new ArrayList<>();
-
 		for(Plot contaminatedplot : contaminatedPlots){
-			neighbors = contaminatedplot.getNeighbors();
-			for(Plot neighbor : neighbors){
-				neighbor.getPotato().changeState();
-				newlyContaminated.add(neighbor);
+			if(contaminatedplot.getPotato().isContagious()) {
+				neighbors = contaminatedplot.getNeighbors();
+				for(Plot neighbor : neighbors){
+					if(neighbor.getPotato().isHealthy()) {
+						neighbor.getPotato().changeState();
+					}
+				}
+			}
+			contaminatedplot.getPotato().changeState();
+		}
+	}
+	
+	public void findContaminatedPotatoes() {
+		contaminatedPlots.clear();
+		for(int i = 0 ; i < ROWS ; i++) {
+			for(int j = 0 ; j < COLS ; j++){
+				if (!plots[i][j].getPotato().isHealthy()) {
+					contaminatedPlots.add(plots[i][j]);
+				}
 			}
 		}
-		contaminatedPlots.addAll(newlyContaminated);
 	}
 
 	public Plot getSelectedPlot(int mouseX, int mouseY) {
