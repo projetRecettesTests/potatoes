@@ -1,12 +1,16 @@
 package recetteTests.projet.potatoes;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 public class Potato {
 
 	private Map<Integer,String> stateList = new TreeMap<>();
 	private int state;
+	private int contaminationPower;
+	
+	Random randomizer = new Random();
 	
 	public Potato() {
 		this.stateList.put(1, "Healthy");
@@ -14,12 +18,17 @@ public class Potato {
 		this.stateList.put(3, "Contagious");
 		this.stateList.put(4, "Dead");
 		this.state = 1;
+		this.contaminationPower = randomizer.nextInt(3) + 1;
 	}
 
 
 	public void changeState(){
-		if (this.getState() < 4){
-			this.setState(this.getState() + 1);
+		if (!this.isDead()){
+			if(this.isContagious() && this.contaminationPower > 0){
+				this.contaminationPower -- ;
+			} else {
+				this.setState(this.getState() + 1);
+			}
 		}
 	}
 

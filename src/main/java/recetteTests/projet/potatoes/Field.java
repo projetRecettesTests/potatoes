@@ -1,6 +1,7 @@
 package recetteTests.projet.potatoes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -79,18 +80,22 @@ public class Field {
 
 	public void contaminate(){
 		findContaminatedPotatoes();
-		boolean ok = false;
+		boolean ok;
 		List<Plot> neighbors;
 
 		for(Plot contaminatedplot : contaminatedPlots){
 			if(contaminatedplot.getPotato().isContagious()) {
+				ok = false;
 				neighbors = contaminatedplot.getNeighbors();
-				while(!ok) {
-					Plot neighbor = neighbors.get(randomizer.nextInt(neighbors.size()));
+				Collections.shuffle(neighbors);
+				int i = 0;
+				while(!ok && i < neighbors.size()-1) {
+					Plot neighbor = neighbors.get(i);
 					if(neighbor.getPotato().isHealthy()) {
 						ok = true;
 						neighbor.getPotato().changeState();
 					}
+					i++;
 				}
 			}
 			contaminatedplot.getPotato().changeState();
