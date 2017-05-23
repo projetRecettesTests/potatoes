@@ -54,7 +54,7 @@ public class Plot {
 	}
 
 	public void checkPotato(){
-		//if (this.isDigged){
+		if (this.isDigged){
 			switch (this.potato.getState()){
 			case 1 :
 				setColor(parent.color(79, 36, 5));
@@ -70,13 +70,12 @@ public class Plot {
 				break;
 			}
 
-		//}
+		}
 	}
 
 	public boolean dig() {
 		if(!this.isDigged) {
 			this.setDigged(true);
-			this.checkPotato();
 			return true;
 		}
 		return false;

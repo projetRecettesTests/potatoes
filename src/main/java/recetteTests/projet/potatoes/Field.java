@@ -46,6 +46,8 @@ public class Field {
 				if(c == randX && r == randY) {
 					plots[r][c].getPotato().changeState();
 					contaminatedPlots.add(plots[r][c]);
+					System.out.println("x : " + r + " y : " + c
+					+ " : " + plots[r][c].getPotato().toString());
 				}
 
 			}
