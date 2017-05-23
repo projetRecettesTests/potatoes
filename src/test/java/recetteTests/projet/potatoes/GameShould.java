@@ -13,6 +13,7 @@ public class GameShould {
 	
 	@Before
 	public void setup() {
+		System.out.println("JE SUIS UN TEST");
 		
 		Field.setSeed(5);	
 		Potato.setSeed(1);
