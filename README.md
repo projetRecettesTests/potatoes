@@ -1,4 +1,6 @@
-# potatoes
+# potatoes [![Build Status](https://travis-ci.org/projetRecettesTests/potatoes.svg?branch=master)](https://travis-ci.org/projetRecettesTests/potatoes) [![codecov](https://codecov.io/gh/projetRecettesTests/potatoes/branch/master/graph/badge.svg)](https://codecov.io/gh/projetRecettesTests/potatoes)
+
+
 
 Enoncé du projet
 
