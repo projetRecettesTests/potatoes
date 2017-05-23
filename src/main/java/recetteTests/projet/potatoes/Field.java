@@ -133,7 +133,9 @@ public class Field {
 
 		for(int i = plot.getRow() - 1  ; i <= plot.getRow()+1 && i < ROWS && i >= 0 ; i++){
 			for(int j = plot.getCol() - 1  ; j <= plot.getCol()+1 && j < COLS && j >= 0 ; j++){
-				neigbhors.add(plots[i][j]);
+				if (!(i == plot.getRow() && j == plot.getCol())){
+					neigbhors.add(plots[i][j]);
+				}
 			}
 		}
 		plot.setNeighbors(neigbhors);
