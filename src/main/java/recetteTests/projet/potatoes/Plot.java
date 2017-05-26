@@ -3,7 +3,6 @@ package recetteTests.projet.potatoes;
 import java.util.List;
 
 import processing.core.PApplet;
-import processing.core.PConstants;
 
 public class Plot {
 
@@ -12,6 +11,8 @@ public class Plot {
 
 	PApplet parent;
 	Potato potato;
+	
+	private PlotView plotView;
 
 	private int row;
 	private int col;
@@ -36,9 +37,7 @@ public class Plot {
 	}
 
 	public void display() {
-		parent.fill(color);
-		parent.rectMode(PConstants.CENTER);
-		parent.rect(x,y,PLOT_SIZE,PLOT_SIZE);
+		this.plotView.displayPlot();
 		this.checkPotato();
 	}
 
