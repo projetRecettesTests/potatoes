@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import static javax.swing.JOptionPane.*;
 
 import processing.core.PApplet;
 
@@ -90,6 +91,8 @@ public class Field {
 				if(selectedPlot.getPotato().isContagious()) {
 					selectedPlot.checkPotato();
 					parent.noLoop();
+					showMessageDialog(null, "You're DEAD motherfucker !", 
+						    "Alert", ERROR_MESSAGE);
 					System.out.println("You're DEAD motherfucker !");
 				}
 			}
