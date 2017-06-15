@@ -32,8 +32,8 @@ public class Plot {
 		this.parent = parent;
 		this.potato = new Potato();
 		this.isDigged = false;
-
-		color = parent.color(0, 153, 38);
+		this.color = parent.color(0, 153, 38);
+		this.plotView = new PlotView(this.parent, this.color, this.x, this.y, this.PLOT_SIZE);
 	}
 
 	public void display() {
