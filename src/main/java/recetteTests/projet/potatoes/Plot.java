@@ -56,16 +56,16 @@ public class Plot {
 		if (this.isDigged){
 			switch (this.potato.getState()){
 			case 1 :
-				setColor(parent.color(79, 36, 5));
+				plotView.setColor(parent.color(79, 36, 5));
 				break;
 			case 2 :
-				setColor(parent.color(249, 94, 4));
+				plotView.setColor(parent.color(249, 94, 4));
 				break;
 			case 3 :
-				setColor(parent.color(237, 14, 2));
+				plotView.setColor(parent.color(237, 14, 2));
 				break;
 			case 4 :
-				setColor(parent.color(0, 0, 0));
+				plotView.setColor(parent.color(0, 0, 0));
 				break;
 			}
 

@@ -30,6 +30,9 @@ public class PlotView {
 		parent.rect(x,y,PLOT_SIZE,PLOT_SIZE);
 	}
 	
+	public void setColor(int color) {
+		this.color = color;
+	}
 	
 
 }
