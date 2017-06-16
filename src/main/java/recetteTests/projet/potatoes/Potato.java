@@ -66,6 +66,10 @@ public class Potato {
 		return this.getState() == 4;
 	}
 
+	public int getContaminationPower(){
+		return this.contaminationPower;
+	}
+
 	@Override
 	public String toString() {
 		return stateList.get(state);
