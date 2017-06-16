@@ -89,8 +89,7 @@ public class Field {
 				+ " : " + selectedPlot.getPotato().toString());
 				this.contaminate();
 				if(selectedPlot.getPotato().isContagious()) {
-					selectedPlot.checkPotato();
-					parent.noLoop();
+					this.digAllPlots();
 					showMessageDialog(null, "You're DEAD motherfucker !", 
 						    "Alert", ERROR_MESSAGE);
 					System.out.println("You're DEAD motherfucker !");
@@ -174,6 +173,14 @@ public class Field {
 			}
 		}
 		plot.setNeighbors(neigbhors);
+	}
+
+	public void digAllPlots(){
+		for(int i = 0 ; i < ROWS ; i++) {
+			for(int j = 0 ; j < COLS ; j++){
+				plots[i][j].dig();
+			}
+		}
 	}
 
 }
