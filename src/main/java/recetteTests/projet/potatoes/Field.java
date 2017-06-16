@@ -90,8 +90,10 @@ public class Field {
 				this.contaminate();
 				if(selectedPlot.getPotato().isContagious()) {
 					this.digAllPlots();
-					showMessageDialog(null, "You're DEAD motherfucker !", 
-						    "Alert", ERROR_MESSAGE);
+					showMessageDialog(null, "Oh oh, cette pomme de terre a une drôle de tête... "
+							+ "Elle n'a vraiment pas l'air en forme, je me demande ce que... "
+							+ "AIE ! Elle m'a mordu ! AAH NOOON, A L'AIDE ! AAARG !",
+						    "T'es mort", ERROR_MESSAGE);
 					System.out.println("You're DEAD motherfucker !");
 				}
 			}
