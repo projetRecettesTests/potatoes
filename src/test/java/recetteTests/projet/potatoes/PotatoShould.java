@@ -6,11 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PotatoShould {
-	Potato potato;
+
+	private final static int POTATO_SEED = 1;
+	
+	private Potato potato;
 	
 	@Before
 	public void setUp() throws Exception {
-		Potato.setSeed(1);
+		Potato.setSeed(POTATO_SEED);
 		this.potato = new Potato();
 	}
 	

@@ -10,33 +10,35 @@ import processing.core.PApplet;
 
 public class Field {
 
-	public final static int ROWS = 20;
-	public final static int COLS = 40;
-	public final static int PLOT_SIZE = 30;
-	public final static int MARGIN = 40;
+	private final static int ROWS = 20;
+	private final static int COLS = 40;
+	private final static int PLOT_SIZE = 30;
+	private final static int MARGIN = 40;
+	private final static int DEFAULT_SEED = 40;
 
-	private static long SEED=0;
+	private static long seed = DEFAULT_SEED;
 	
-	PApplet parent;
-	Plot[][] plots;
-	public List<Plot> unhealthyPlots;
+	private PApplet parent;
+	private Plot[][] plots;
+	
+	private List<Plot> unhealthyPlots;
 
-	Random randomizer = new Random();
+	private Random randomizer = new Random();
 
 	public Field(PApplet parent) {
 		this.parent = parent;
 		
-		if(SEED != 0) {
-			randomizer.setSeed(SEED);
+		if(seed != DEFAULT_SEED) {
+			randomizer.setSeed(seed);
 		}
 		
 		generateField();
 	}
 
-	private void generateField() {
+	public void generateField() {
 		plots = new Plot[ROWS][COLS];
 
-		unhealthyPlots = new ArrayList<>();
+		setUnhealthyPlots(new ArrayList<>());
 		
 		int randX = randomizer.nextInt((COLS - 2) - 1) + 2;
 		int randY = randomizer.nextInt((ROWS - 2) - 1) + 2;
@@ -63,9 +65,9 @@ public class Field {
 		}
 	}
 
-	private void putFirstContaminatedPotato(Plot plot) {
+	public void putFirstContaminatedPotato(Plot plot) {
 		plot.getPotato().changeState();
-		unhealthyPlots.add(plot);
+		getUnhealthyPlots().add(plot);
 
 	}
 
@@ -100,7 +102,7 @@ public class Field {
 		boolean ok;
 		List<Plot> neighbors;
 
-		for(Plot unhealthyPlot : unhealthyPlots){
+		for(Plot unhealthyPlot : getUnhealthyPlots()){
 			if(unhealthyPlot.getPotato().isContagious()) {
 				ok = false;
 				neighbors = unhealthyPlot.getNeighbors();
@@ -123,39 +125,14 @@ public class Field {
 	}
 	
 	public void findContaminatedPotatoes() {
-		unhealthyPlots.clear();
+		getUnhealthyPlots().clear();
 		for(int i = 0 ; i < ROWS ; i++) {
 			for(int j = 0 ; j < COLS ; j++){
 				if (!plots[i][j].getPotato().isHealthy()) {
-					unhealthyPlots.add(plots[i][j]);
+					getUnhealthyPlots().add(plots[i][j]);
 				}
 			}
 		}
-	}
-
-	public Plot getSelectedPlot(int mouseX, int mouseY) {
-		Plot selectedPlot = null;
-		for(int i = 0 ; i < ROWS ; i++) {
-			for(int j = 0 ; j < COLS ; j++){
-				if (plots[i][j].inBounds(mouseX, mouseY)) {
-					selectedPlot = plots[i][j];
-				}
-			}
-		}
-		return selectedPlot;
-	}
-
-	public static int getCols() {
-		return COLS;
-	}
-
-	public Plot[][] getPlots() {
-		return plots;
-	}
-	
-	
-	public static void setSeed(long s) {
-		SEED = s;
 	}
 
 	public void findPlotNeighbors(Plot plot){
@@ -177,5 +154,38 @@ public class Field {
 				plots[i][j].dig();
 			}
 		}
+	}
+
+	public static int getCols() {
+		return COLS;
+	}
+
+	public Plot[][] getPlots() {
+		return plots;
+	}
+	
+	
+	public static void setSeed(long s) {
+		seed = s;
+	}
+
+	public List<Plot> getUnhealthyPlots() {
+		return unhealthyPlots;
+	}
+
+	public void setUnhealthyPlots(List<Plot> unhealthyPlots) {
+		this.unhealthyPlots = unhealthyPlots;
+	}
+
+	public Plot getSelectedPlot(int mouseX, int mouseY) {
+		Plot selectedPlot = null;
+		for(int i = 0 ; i < ROWS ; i++) {
+			for(int j = 0 ; j < COLS ; j++){
+				if (plots[i][j].inBounds(mouseX, mouseY)) {
+					selectedPlot = plots[i][j];
+				}
+			}
+		}
+		return selectedPlot;
 	}
 }

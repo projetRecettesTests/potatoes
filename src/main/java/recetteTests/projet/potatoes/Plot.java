@@ -7,11 +7,9 @@ import processing.core.PApplet;
 public class Plot {
 
 	public final static int PLOT_SIZE = 30;
-	//public final int REG_COLOR = color(255);
 
-	PApplet parent;
-	Potato potato;
-	
+	private PApplet parent;
+	private Potato potato;
 	private PlotView plotView;
 
 	private int row;
@@ -21,7 +19,7 @@ public class Plot {
 
 	private boolean isDigged;
 
-	List<Plot> Neighbors;
+	private List<Plot> neighbors;
 
 	public Plot(int row, int col, int x, int y, PApplet parent) {
 		this.row = row;
@@ -31,14 +29,14 @@ public class Plot {
 		this.parent = parent;
 		this.potato = new Potato();
 		this.isDigged = false;
-		this.plotView = new PlotView(this.parent, parent.color(0, 153, 38), this.x, this.y, this.PLOT_SIZE);
+		this.plotView = new PlotView(this.parent, parent.color(0, 153, 38), this.x, this.y, PLOT_SIZE);
 	}
 
 	public void display() {
 		this.plotView.displayPlot();
 	}
 
-	boolean inBounds(int posX, int posY) {
+	public boolean inBounds(int posX, int posY) {
 
 		if (posX >= x - PLOT_SIZE / 2 && posX <= x + PLOT_SIZE / 2) {
 			if (posY >= y - PLOT_SIZE / 2 && posY <= y + PLOT_SIZE / 2) {
@@ -115,10 +113,10 @@ public class Plot {
 	}
 
 	public List<Plot> getNeighbors() {
-		return Neighbors;
+		return neighbors;
 	}
 
 	public void setNeighbors(List<Plot> neighbors) {
-		Neighbors = neighbors;
+		this.neighbors = neighbors;
 	}
 }

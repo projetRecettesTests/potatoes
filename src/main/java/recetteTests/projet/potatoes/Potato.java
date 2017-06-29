@@ -5,12 +5,15 @@ import java.util.Random;
 import java.util.TreeMap;
 
 public class Potato {
+	
+	public final static int DEFAULT_SEED = 0;
 
-	private Map<Integer,String> stateList = new TreeMap<>();
 	private int state;
 	private int contaminationPower;
-	private static long SEED=0;
-		
+	private static long seed = DEFAULT_SEED;
+	
+	private Map<Integer,String> stateList = new TreeMap<>();	
+	
 	private Random randomizer = new Random();
 	
 	public Potato() {
@@ -20,8 +23,8 @@ public class Potato {
 		this.stateList.put(4, "Dead");
 		this.state = 1;
 		
-		if(SEED != 0) {
-			randomizer.setSeed(SEED);
+		if(seed != DEFAULT_SEED) {
+			randomizer.setSeed(seed);
 		}
 		
 		this.contaminationPower = randomizer.nextInt(3) + 1;
@@ -47,7 +50,7 @@ public class Potato {
 	}
 	
 	public static void setSeed(long s) {
-		SEED = s;
+		seed = s;
 	}
 	
 	public boolean isHealthy() {

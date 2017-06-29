@@ -11,14 +11,17 @@ import org.junit.Test;
 
 public class FieldShould {
 	
-	Game game;
-	Field field;
-	int mouseX = 84;
-	int mouseY = 82;
+	private final static int MOUSE_X = 84;
+	private final static int MOUSE_Y = 82;
+	private final static int FIELD_SEED = 5;
+	private final static String SEPARATOR = System.getProperty("line.separator");
+	
+	private Game game;
+	private Field field;
 	
 	@Before
 	public void setup() {
-		Field.setSeed(5);
+		Field.setSeed(FIELD_SEED);
 		game = new Game(); 
 		field = new Field(game);
 	}
@@ -30,7 +33,7 @@ public class FieldShould {
 	
 	@Test
 	public void haveOneContaminatedPotatoOnCreate() {
-		assertEquals(true, field.unhealthyPlots.size() == 1);
+		assertEquals(true, field.getUnhealthyPlots().size() == 1);
 	}
 	
 	@Test
@@ -40,12 +43,11 @@ public class FieldShould {
 		OutputStream os = new ByteArrayOutputStream();
 		PrintStream ps = new PrintStream(os);
 		System.setOut(ps);
-		String separator = System.getProperty("line.separator");
 		
 		// Perform test
-		field.getSelectedPlot(mouseX, mouseY).getPotato().setState(3);
-		field.digPlot(mouseX, mouseY);
-		assertEquals("You're DEAD motherfucker !" + separator, os.toString());
+		field.getSelectedPlot(MOUSE_X, MOUSE_Y).getPotato().setState(3);
+		field.digPlot(MOUSE_X, MOUSE_Y);
+		assertEquals("You're DEAD motherfucker !" + SEPARATOR, os.toString());
 		
 		System.setOut(originalOut);
 		
