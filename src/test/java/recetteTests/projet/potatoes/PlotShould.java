@@ -31,7 +31,18 @@ public class PlotShould {
 	}
 
 	@Test
-	public void beGreenWhenUndigged() {
+	public void allowToDigWhenNotDigged() {
+		assertEquals(true, plot.dig());
+	}
+
+	@Test
+	public void notAllowToDigWhenAlreadyDigged() {
+		this.plot.dig();
+		assertEquals(false, plot.dig());
+	}
+
+	@Test
+	public void beGreenWhenNotDigged() {
 		assertEquals(game.color(0, 153, 38), this.plot.getColor());
 	}
 
