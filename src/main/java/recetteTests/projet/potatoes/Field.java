@@ -27,7 +27,6 @@ public class Field {
 		this.parent = parent;
 		
 		if(SEED != 0) {
-			System.out.println(SEED);
 			randomizer.setSeed(SEED);
 		}
 		
@@ -52,8 +51,6 @@ public class Field {
 
 				if(c == randX && r == randY) {
 					putFirstContaminatedPotato(plots[r][c]);
-					System.out.println("x : " + r + " y : " + c
-							+ " : " + plots[r][c].getPotato().toString());
 				}
 
 			}
@@ -81,12 +78,9 @@ public class Field {
 	}
 
 	public void digPlot(int mouseX, int mouseY) {
-		System.out.println("click"+ mouseX + " " + mouseY);
 		Plot selectedPlot = getSelectedPlot(mouseX, mouseY);
 		if (selectedPlot != null){
 			if(selectedPlot.dig()) {
-				System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
-				+ " : " + selectedPlot.getPotato().toString());
 				this.contaminate();
 				if(selectedPlot.getPotato().isContagious()) {
 					this.digAllPlots();
