@@ -10,8 +10,8 @@ public class PotatoShould {
 	
 	@Before
 	public void setUp() throws Exception {
-		this.potato = new Potato();
 		Potato.setSeed(1);
+		this.potato = new Potato();
 	}
 	
 	@Test
