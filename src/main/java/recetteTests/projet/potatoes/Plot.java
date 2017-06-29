@@ -121,6 +121,4 @@ public class Plot {
 	public void setNeighbors(List<Plot> neighbors) {
 		Neighbors = neighbors;
 	}
-
-
 }

@@ -11,7 +11,6 @@ public class PlotViewShould {
 	Field field;
 	Plot plot;
 
-
 	int mouseX = 84;
 	int mouseY = 82;
 

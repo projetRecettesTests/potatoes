@@ -74,7 +74,4 @@ public class Potato {
 	public String toString() {
 		return stateList.get(state);
 	}
-	
-	
-
 }

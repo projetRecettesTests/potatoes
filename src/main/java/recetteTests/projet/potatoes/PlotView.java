@@ -10,8 +10,6 @@ public class PlotView {
 	private int x;
 	private int y;
 	private int PLOT_SIZE;
-	
-	
 
 	public PlotView(PApplet parent, int color, int x, int y, int pLOT_SIZE) {
 		this.parent = parent;
@@ -35,5 +33,4 @@ public class PlotView {
 	public int getColor() {
 		return this.color;
 	}
-
 }

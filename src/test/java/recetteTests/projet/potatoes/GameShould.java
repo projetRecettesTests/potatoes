@@ -10,7 +10,6 @@ public class GameShould {
 	Game g ;
 	Plot fisrtContaminatedPlot;
 	
-	
 	@Before
 	public void setup() {
 		System.out.println("JE SUIS UN TEST");
@@ -52,6 +51,5 @@ public class GameShould {
 		g.mousePressed();
 		assertEquals(true, g.field.getSelectedPlot(g.mouseX, g.mouseY).isDigged());
 	}
-	//contaminateWhenClickOnNotDigged
-	
+	//contaminateWhenClickOnNotDigged	
 }
