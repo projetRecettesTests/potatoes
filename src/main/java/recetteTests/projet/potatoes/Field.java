@@ -1,8 +1,10 @@
 package recetteTests.projet.potatoes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import static javax.swing.JOptionPane.*;
 
 import processing.core.PApplet;
 
@@ -13,29 +15,32 @@ public class Field {
 	public final static int PLOT_SIZE = 30;
 	public final static int MARGIN = 40;
 
+	private static long SEED=0;
+	
 	PApplet parent;
 	Plot[][] plots;
-	List<Plot> contaminatedPlots;
+	public List<Plot> unhealthyPlots;
 
-	HealthyState healthyState = new HealthyState();
-	ContaminatedState contaminatedState = new ContaminatedState();
-
-	Random r = new Random();
+	Random randomizer = new Random();
 
 	public Field(PApplet parent) {
 		this.parent = parent;
+		
+		if(SEED != 0) {
+			System.out.println(SEED);
+			randomizer.setSeed(SEED);
+		}
+		
 		generateField();
 	}
 
 	private void generateField() {
 		plots = new Plot[ROWS][COLS];
+
+		unhealthyPlots = new ArrayList<>();
 		
-		contaminatedPlots = new ArrayList<>();
-
-		int randX = r.nextInt((COLS - 2) - 1) + 2;
-		int randY = r.nextInt((ROWS - 2) - 1) + 2;
-
-		System.out.println(randX + " " + randY);
+		int randX = randomizer.nextInt((COLS - 2) - 1) + 2;
+		int randY = randomizer.nextInt((ROWS - 2) - 1) + 2;
 
 		for (int r = 0; r < ROWS; r++) {
 			for (int c = 0; c < COLS; c++) {
@@ -46,21 +51,25 @@ public class Field {
 				plots[r][c] = new Plot(r, c, x, y, parent);
 
 				if(c == randX && r == randY) {
-					contaminatedState.changeState(plots[r][c].getPotato().getContext());
-					contaminatedPlots.add(plots[r][c]);
-				}
-				else {
-					healthyState.changeState(plots[r][c].getPotato().getContext());
+					putFirstContaminatedPotato(plots[r][c]);
+					System.out.println("x : " + r + " y : " + c
+							+ " : " + plots[r][c].getPotato().toString());
 				}
 
 			}
 		}
-		
+
 		for(int i = 0 ; i < ROWS ; i++) {
 			for(int j = 0 ; j < COLS ; j++){
 				this.findPlotNeighbors(plots[i][j]);
 			}
-		}		
+		}
+	}
+
+	private void putFirstContaminatedPotato(Plot plot) {
+		plot.getPotato().changeState();
+		unhealthyPlots.add(plot);
+
 	}
 
 	public void display() {
@@ -71,23 +80,61 @@ public class Field {
 		}
 	}
 
-	public void dig(int mouseX, int mouseY) {
+	public void digPlot(int mouseX, int mouseY) {
+		System.out.println("click"+ mouseX + " " + mouseY);
 		Plot selectedPlot = getSelectedPlot(mouseX, mouseY);
 		if (selectedPlot != null){
-			System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
-			+ " : " + getPotatoState(selectedPlot));
-			selectedPlot.checkPotato();
-			
-			this.contaminate();
+			if(selectedPlot.dig()) {
+				System.out.println("x : " + selectedPlot.getX() + " y : " + selectedPlot.getY()
+				+ " : " + selectedPlot.getPotato().toString());
+				this.contaminate();
+				if(selectedPlot.getPotato().isContagious()) {
+					this.digAllPlots();
+					showMessageDialog(null, "Oh oh, cette pomme de terre a une drôle de tête... \n"
+							+ "Elle n'a vraiment pas l'air en forme, je me demande ce que... \n"
+							+ "AIE ! Elle m'a mordu ! AAH NOOON, A L'AIDE ! AAARG !",
+						    "T'es mort", ERROR_MESSAGE);
+					System.out.println("You're DEAD motherfucker !");
+				}
+			}
+
+		}
+	}
+
+	public void contaminate(){
+		findContaminatedPotatoes();
+		boolean ok;
+		List<Plot> neighbors;
+
+		for(Plot unhealthyPlot : unhealthyPlots){
+			if(unhealthyPlot.getPotato().isContagious()) {
+				ok = false;
+				neighbors = unhealthyPlot.getNeighbors();
+				Collections.shuffle(neighbors);
+				int i = 0;
+				while(!ok && i < neighbors.size()-1) {
+					Plot neighbor = neighbors.get(i);
+					if(neighbor.getPotato().isHealthy() && !neighbor.isDigged()) {
+						ok = true;
+						neighbor.getPotato().changeState();
+					}
+					i++;
+				}
+			}
+			if (!unhealthyPlot.isDigged()){
+				unhealthyPlot.getPotato().changeState();			
+			}
+
 		}
 	}
 	
-	public void contaminate(){
-		List<Plot> neighbors;
-		for(Plot contaminatedPlot : contaminatedPlots){
-			neighbors = contaminatedPlot.getNeighbors();
-			for(Plot neighbor : neighbors){
-				contaminatedState.changeState(neighbor.getPotato().getContext());
+	public void findContaminatedPotatoes() {
+		unhealthyPlots.clear();
+		for(int i = 0 ; i < ROWS ; i++) {
+			for(int j = 0 ; j < COLS ; j++){
+				if (!plots[i][j].getPotato().isHealthy()) {
+					unhealthyPlots.add(plots[i][j]);
+				}
 			}
 		}
 	}
@@ -103,10 +150,6 @@ public class Field {
 		}
 		return selectedPlot;
 	}
-	
-	public String getPotatoState(Plot plot) {
-		return plot.getPotato().getContext().getState().toString();
-	}
 
 	public static int getCols() {
 		return COLS;
@@ -116,15 +159,30 @@ public class Field {
 		return plots;
 	}
 	
-	public void findPlotNeighbors(Plot plot){	
+	
+	public static void setSeed(long s) {
+		SEED = s;
+	}
+
+	public void findPlotNeighbors(Plot plot){
 		List<Plot> neigbhors = new ArrayList<>();
-		
+
 		for(int i = plot.getRow() - 1  ; i <= plot.getRow()+1 && i < ROWS && i >= 0 ; i++){
 			for(int j = plot.getCol() - 1  ; j <= plot.getCol()+1 && j < COLS && j >= 0 ; j++){
-				neigbhors.add(plots[i][j]);
+				if (!(i == plot.getRow() && j == plot.getCol())){
+					neigbhors.add(plots[i][j]);
+				}
 			}
 		}
-		plot.setNeighbors(neigbhors);	
+		plot.setNeighbors(neigbhors);
+	}
+
+	public void digAllPlots(){
+		for(int i = 0 ; i < ROWS ; i++) {
+			for(int j = 0 ; j < COLS ; j++){
+				plots[i][j].dig();
+			}
+		}
 	}
 
 }

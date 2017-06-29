@@ -3,7 +3,6 @@ package recetteTests.projet.potatoes;
 import java.util.List;
 
 import processing.core.PApplet;
-import processing.core.PConstants;
 
 public class Plot {
 
@@ -13,12 +12,16 @@ public class Plot {
 	PApplet parent;
 	Potato potato;
 	
+	private PlotView plotView;
+
 	private int row;
 	private int col;
 	private int x;
 	private int y;
 	private int color;
-	
+
+	private boolean isDigged;
+
 	List<Plot> Neighbors;
 
 	public Plot(int row, int col, int x, int y, PApplet parent) {
@@ -28,14 +31,13 @@ public class Plot {
 		this.y = y;
 		this.parent = parent;
 		this.potato = new Potato();
-
-		color = parent.color(0, 153, 38);
+		this.isDigged = false;
+		this.color = parent.color(0, 153, 38);
+		this.plotView = new PlotView(this.parent, this.color, this.x, this.y, this.PLOT_SIZE);
 	}
 
 	public void display() {
-		parent.fill(color);
-		parent.rectMode(PConstants.CENTER);
-		parent.rect(x,y,PLOT_SIZE,PLOT_SIZE);
+		this.plotView.displayPlot();
 		this.checkPotato();
 	}
 
@@ -51,17 +53,33 @@ public class Plot {
 	}
 
 	public void checkPotato(){
-		if (this.potato.getContext().getState().toString() ==  "Healthy State"){
-			setColor(parent.color(79, 36, 5));
-		}
-		else if (this.potato.getContext().getState().toString() ==  "Contaminated State"){
-			setColor(parent.color(249, 94, 4));
-		}
-		else if (this.potato.getContext().getState().toString() ==  "Contagious State"){
-			setColor(parent.color(237, 14, 2));
+		if (this.isDigged){
+			switch (this.potato.getState()){
+			case 1 :
+				plotView.setColor(parent.color(79, 36, 5));
+				break;
+			case 2 :
+				plotView.setColor(parent.color(249, 94, 4));
+				break;
+			case 3 :
+				plotView.setColor(parent.color(237, 14, 2));
+				break;
+			case 4 :
+				plotView.setColor(parent.color(0, 0, 0));
+				break;
+			}
+
 		}
 	}
-	
+
+	public boolean dig() {
+		if(!this.isDigged) {
+			this.setDigged(true);
+			return true;
+		}
+		return false;
+	}
+
 	public int getRow() {
 		return row;
 	}
@@ -95,18 +113,20 @@ public class Plot {
 	}
 
 	public boolean isDigged() {
-		if(this.color != parent.color(0, 153, 38)) {
-			return true;
-		}
-		return false;
+		return this.isDigged;
 	}
-	
+
+	public void setDigged(boolean isDigged) {
+		this.isDigged = isDigged;
+	}
+
 	public List<Plot> getNeighbors() {
 		return Neighbors;
 	}
 
 	public void setNeighbors(List<Plot> neighbors) {
 		Neighbors = neighbors;
-}
+	}
+
 
 }

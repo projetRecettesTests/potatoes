@@ -36,7 +36,7 @@ public class Game extends PApplet {
 	public void mousePressed() {
 
 		if (mouseButton == LEFT) {
-			field.dig(mouseX, mouseY);
+			field.digPlot(mouseX, mouseY);
 		} else if (mouseButton == RIGHT) {
 
 		}
