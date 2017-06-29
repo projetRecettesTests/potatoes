@@ -18,7 +18,6 @@ public class Plot {
 	private int col;
 	private int x;
 	private int y;
-	private int color;
 
 	private boolean isDigged;
 
@@ -32,8 +31,7 @@ public class Plot {
 		this.parent = parent;
 		this.potato = new Potato();
 		this.isDigged = false;
-		this.color = parent.color(0, 153, 38);
-		this.plotView = new PlotView(this.parent, this.color, this.x, this.y, this.PLOT_SIZE);
+		this.plotView = new PlotView(this.parent, parent.color(0, 153, 38), this.x, this.y, this.PLOT_SIZE);
 	}
 
 	public void display() {
@@ -97,11 +95,7 @@ public class Plot {
 	}
 
 	public int getColor() {
-		return color;
-	}
-
-	public void setColor(int color) {
-		this.color = color;
+		return this.plotView.getColor();
 	}
 
 	public Potato getPotato() {

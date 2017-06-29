@@ -21,8 +21,6 @@ public class PlotView {
 		PLOT_SIZE = pLOT_SIZE;
 	}
 
-
-
 	public void displayPlot() {
 		// TODO Auto-generated method stub
 		parent.fill(color);
@@ -34,5 +32,8 @@ public class PlotView {
 		this.color = color;
 	}
 	
+	public int getColor() {
+		return this.color;
+	}
 
 }
