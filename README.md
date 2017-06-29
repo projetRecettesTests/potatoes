@@ -1,4 +1,4 @@
-# potatoes [![Build Status](https://travis-ci.org/projetRecettesTests/potatoes.svg?branch=tests)](https://travis-ci.org/projetRecettesTests/potatoes) [![codecov](https://codecov.io/gh/projetRecettesTests/potatoes/branch/tests/graph/badge.svg)](https://codecov.io/gh/projetRecettesTests/potatoes)
+# potatoes [![Build Status](https://travis-ci.org/projetRecettesTests/potatoes.svg?branch=master)](https://travis-ci.org/projetRecettesTests/potatoes) [![codecov](https://codecov.io/gh/projetRecettesTests/potatoes/branch/master/graph/badge.svg)](https://codecov.io/gh/projetRecettesTests/potatoes)
 
 Enoncé du projet
 
@@ -81,8 +81,8 @@ Grille :
 Case :
 -	création des cases ?
 -	changement d'état (occupée / creusée)
-	o	creuser une case occupée
-	o	creuser une case déjà creusée
+	- creuser une case occupée
+	- creuser une case déjà creusée
 
 Un clic dans la grille doit :
  - creuser la bonne case
@@ -91,10 +91,10 @@ Un clic dans la grille doit :
 Patates :
 -	Changement d'état
 -	Contamination (en fonction du nombre de voisines)
-	o	les différents cas « normaux » de contamination.
-	o	si toutes les patates sont contaminées ?
-	o	si plus de patates contaminantes ?
-	o	si que zone morte comme voisines ?
+	- les différents cas « normaux » de contamination.
+	- si toutes les patates sont contaminées ?
+	- si plus de patates contaminantes ?
+	- si que zone morte comme voisines ?
 
 Creuser : réaction en fonction des états de la patate contenue
  - Case occupée :

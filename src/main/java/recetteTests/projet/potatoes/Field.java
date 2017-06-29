@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import static javax.swing.JOptionPane.*;
 
 import processing.core.PApplet;
 
@@ -88,8 +89,11 @@ public class Field {
 				+ " : " + selectedPlot.getPotato().toString());
 				this.contaminate();
 				if(selectedPlot.getPotato().isContagious()) {
-					selectedPlot.checkPotato();
-					parent.noLoop();
+					this.digAllPlots();
+					showMessageDialog(null, "Oh oh, cette pomme de terre a une drôle de tête... \n"
+							+ "Elle n'a vraiment pas l'air en forme, je me demande ce que... \n"
+							+ "AIE ! Elle m'a mordu ! AAH NOOON, A L'AIDE ! AAARG !",
+						    "T'es mort", ERROR_MESSAGE);
 					System.out.println("You're DEAD motherfucker !");
 				}
 			}
@@ -173,4 +177,11 @@ public class Field {
 		plot.setNeighbors(neigbhors);
 	}
 
+	public void digAllPlots(){
+		for(int i = 0 ; i < ROWS ; i++) {
+			for(int j = 0 ; j < COLS ; j++){
+				plots[i][j].dig();
+			}
+		}
+	}
 }

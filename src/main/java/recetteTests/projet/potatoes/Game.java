@@ -10,7 +10,6 @@ public class Game extends PApplet {
 
 	Field field;
 
-
 	public static void main(String[] args) {
 		PApplet.main("recetteTests.projet.potatoes.Game");
 	}
@@ -40,7 +39,5 @@ public class Game extends PApplet {
 		} else if (mouseButton == RIGHT) {
 
 		}
-
 	}
-
 }

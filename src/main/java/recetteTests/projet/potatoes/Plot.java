@@ -18,7 +18,6 @@ public class Plot {
 	private int col;
 	private int x;
 	private int y;
-	private int color;
 
 	private boolean isDigged;
 
@@ -32,13 +31,11 @@ public class Plot {
 		this.parent = parent;
 		this.potato = new Potato();
 		this.isDigged = false;
-
-		color = parent.color(0, 153, 38);
+		this.plotView = new PlotView(this.parent, parent.color(0, 153, 38), this.x, this.y, this.PLOT_SIZE);
 	}
 
 	public void display() {
 		this.plotView.displayPlot();
-		this.checkPotato();
 	}
 
 	boolean inBounds(int posX, int posY) {
@@ -56,16 +53,16 @@ public class Plot {
 		if (this.isDigged){
 			switch (this.potato.getState()){
 			case 1 :
-				setColor(parent.color(79, 36, 5));
+				plotView.setColor(parent.color(79, 36, 5));
 				break;
 			case 2 :
-				setColor(parent.color(249, 94, 4));
+				plotView.setColor(parent.color(249, 94, 4));
 				break;
 			case 3 :
-				setColor(parent.color(237, 14, 2));
+				plotView.setColor(parent.color(237, 14, 2));
 				break;
 			case 4 :
-				setColor(parent.color(0, 0, 0));
+				plotView.setColor(parent.color(0, 0, 0));
 				break;
 			}
 
@@ -75,6 +72,7 @@ public class Plot {
 	public boolean dig() {
 		if(!this.isDigged) {
 			this.setDigged(true);
+			this.checkPotato();
 			return true;
 		}
 		return false;
@@ -97,11 +95,7 @@ public class Plot {
 	}
 
 	public int getColor() {
-		return color;
-	}
-
-	public void setColor(int color) {
-		this.color = color;
+		return this.plotView.getColor();
 	}
 
 	public Potato getPotato() {
@@ -127,6 +121,4 @@ public class Plot {
 	public void setNeighbors(List<Plot> neighbors) {
 		Neighbors = neighbors;
 	}
-
-
 }

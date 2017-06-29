@@ -7,7 +7,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses(
 {
-	GameShould.class
+	GameShould.class,
+	PlotShould.class,
+	PlotViewShould.class,
+	PotatoShould.class,
 })
 public class AppTest
 {
