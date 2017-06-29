@@ -38,7 +38,6 @@ public class Plot {
 
 	public void display() {
 		this.plotView.displayPlot();
-		this.checkPotato();
 	}
 
 	boolean inBounds(int posX, int posY) {
@@ -75,6 +74,7 @@ public class Plot {
 	public boolean dig() {
 		if(!this.isDigged) {
 			this.setDigged(true);
+			this.checkPotato();
 			return true;
 		}
 		return false;
