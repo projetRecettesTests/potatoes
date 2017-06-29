@@ -7,19 +7,21 @@ import org.junit.Test;
 
 public class PlotShould {
 
-	Game game;
-	Field field;
-	Plot plot;
+	private final static int MOUSE_X = 84;
+	private final static int MOUSE_Y = 82;
+	private final static int FIELD_SEED = 5;
+	
+	private Game game;
+	private Field field;
+	private Plot plot;
 
-	int mouseX = 84;
-	int mouseY = 82;
 
 	@Before
 	public void setUp() throws Exception {
-		Field.setSeed(5);
+		Field.setSeed(FIELD_SEED);
 		this.game = new Game();
 		this.field = new Field(game);
-		this.plot = this.field.getSelectedPlot(mouseX, mouseY);
+		this.plot = this.field.getSelectedPlot(MOUSE_X, MOUSE_Y);
 	}
 
 	@Test

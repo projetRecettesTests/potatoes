@@ -8,6 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses(
 {
 	GameShould.class,
+	FieldShould.class,
 	PlotShould.class,
 	PlotViewShould.class,
 	PotatoShould.class,

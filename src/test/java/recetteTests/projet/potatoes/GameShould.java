@@ -7,26 +7,28 @@ import org.junit.Test;
 
 public class GameShould {
 	
-	Game g ;
-	Plot fisrtContaminatedPlot;
+	private final static int MOUSE_X = 84;
+	private final static int MOUSE_Y = 82;
+	private final static int FIELD_SEED = 5;
+	private final static int POTATO_SEED = 1;
+	
+	private Game g ;
 	
 	@Before
 	public void setup() {
-		System.out.println("JE SUIS UN TEST");
 		
-		Field.setSeed(5);	
-		Potato.setSeed(1);
+		Field.setSeed(FIELD_SEED);	
+		Potato.setSeed(POTATO_SEED);
 		g = new Game();
 		g.setup();
 		g.mouseButton = Game.LEFT;
-		fisrtContaminatedPlot = g.field.unhealthyPlots.get(0); // 18 - 24
 	}
 	
 	@Test
 	public void loopWhenClickOnHealthydPotato()
 	{
-		g.mouseX = 84;
-		g.mouseY = 82;
+		g.mouseX = MOUSE_X;
+		g.mouseY = MOUSE_Y;
 		g.mousePressed();
 		assertEquals(true, g.isLooping());
 	}
@@ -47,10 +49,9 @@ public class GameShould {
 	@Test
 	public void digWhenClickOnNotDiggedPlot() 
 	{
-		g.mouseX = 84;
-		g.mouseY = 82;
+		g.mouseX = MOUSE_X;
+		g.mouseY = MOUSE_Y;
 		g.mousePressed();
 		assertEquals(true, g.field.getSelectedPlot(g.mouseX, g.mouseY).isDigged());
-	}
-	//contaminateWhenClickOnNotDigged	
+	}	
 }

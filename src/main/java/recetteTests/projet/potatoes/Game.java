@@ -8,7 +8,7 @@ public class Game extends PApplet {
 	public final static int WIDTH = 1250;
 	public final static int HEIGHT = 800;
 
-	Field field;
+	public Field field;
 
 	public static void main(String[] args) {
 		PApplet.main("recetteTests.projet.potatoes.Game");
